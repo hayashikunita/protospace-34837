@@ -2,11 +2,13 @@ class CommentsController < ApplicationController
   def create
     @comment = Comment.new(comment_params)
     if @comment.save
-        redirect_to prototype_path(@comment.text)
-    else
+        redirect_to prototype_path(@comment.prototype)
     end
+ # views/tweets/show.html.erbのファイルを参照しています。
   end
 
+def destroy
+end
 
   private
 
