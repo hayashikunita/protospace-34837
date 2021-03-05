@@ -1,5 +1,9 @@
 class PrototypesController < ApplicationController
+
+  before_action :set_prototype, only: [:show, :edit, :update]
+
   def index
+    @prototype = Prototype.all
   end
 
   def new
@@ -16,9 +20,41 @@ class PrototypesController < ApplicationController
     end
   end
 
+  def show
+    # @prototype = Prototype.find(params[:id])
+  end
+
+  def edit
+    # @prototype = Prototype.find(params[:id])
+  end
+
+  def update
+    @prototype = Prototype.find(params[:id])
+    if @prototype.update(prototypes_params)
+      redirect_to prototype_path
+    else
+      render :edit
+    end
+  end
+
+  def destroy
+    @prototype = Prototype.find(params[:id])
+    if @prototype.destroy
+      redirect_to root_path
+    else
+      redirect_to root_path
+    end
+  end
+
+
   private
-  
+
   def prototypes_params
     params.require(:prototype).permit(:title, :catch_copy, :concept, :image).merge(user_id: current_user.id)
   end
+  
+  def set_prototype
+    @prototype = Prototype.find(params[:id])
+  end
+
 end
