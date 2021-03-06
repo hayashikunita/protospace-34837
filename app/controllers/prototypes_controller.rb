@@ -1,5 +1,5 @@
 class PrototypesController < ApplicationController
-
+  before_action :authenticate_user!, only: [:new,:edit,:destory]
   before_action :set_prototype, only: [:show, :edit, :update]
 
   def index
@@ -27,6 +27,9 @@ class PrototypesController < ApplicationController
   end
 
   def edit
+    unless user_signed_in?
+      redirect_to action: :index
+    end
     # @prototype = Prototype.find(params[:id])
   end
 
