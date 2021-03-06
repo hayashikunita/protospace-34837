@@ -3,7 +3,9 @@ class PrototypesController < ApplicationController
   before_action :set_prototype, only: [:show, :edit, :update]
 
   def index
-    @prototype = Prototype.all
+    @prototypes = Prototype.all
+    # @user = User.find(params[:id])
+    # @prototypes = @user.prototypes
   end
 
   def new
@@ -23,6 +25,7 @@ class PrototypesController < ApplicationController
   def show
     @comment = Comment.new
     @comments = @prototype.comments.includes(:user)
+
     # @prototype = Prototype.find(params[:id])
   end
 
